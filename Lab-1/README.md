@@ -1,14 +1,18 @@
 # Physical Computing - LEDs and Push Buttons
 
-In this laboratory, we will do simple circuits where we get more familiar with ESP32 and using C++.
+In this laboratory, we will do simple circuits where we get more familiar with ESP32 and using C++. Instructions are given by [Andrew J. Park, Ph.D.](https://www.twu.ca/profile/andrew-park).
+
+We will use Freenove Ultimate Starter Kit for ESP32-WROVER which you can buy on [Amazon](https://www.amazon.ca/ESP32-WROVER-Contained-Compatible-Bluetooth-Tutorials/dp/B08FM2NCST). How to set up the kit and start uploading code you can find on [Freenove](https://www.freenove.com/tutorial).
 
 ## Project 1 - Three LEDs
 
-![Three LEDs image](./Project-1/project-1.jpg)
-
 ### Date: 09/16/23
 
-Description: Design and construct a circuit that includes three LEDs (red, green, and blue). When your program
+![Three LEDs image](https://res.cloudinary.com/boucekdev/image/upload/v1695062876/github/fitngwzptsagqj3a9vy7.jpg)
+
+### Instructions:
+
+Design and construct a circuit that includes three LEDs (red, green, and blue). When your program
 runs, each LED turns on and off (blinks) sequentially and continually (red → green → blue → red → green → blue → …). Capture your settings and working circuit in photos and videos.
 
 ### Parts:
@@ -21,46 +25,45 @@ runs, each LED turns on and off (blinks) sequentially and continually (red → g
 
 ### Three LEDs schema:
 
-![Three LEDs Schematic image](./Project-1/project-1-schematic.jpg)
+![Three LEDs Schematic image](https://res.cloudinary.com/boucekdev/image/upload/v1695062876/github/fod6vowxeatjtmuk0s4c.jpg)
 
 ### Three LEDs Breadboard View:
 
-![Three LEDs Breadboard View image](./Project-1/project-1-breadboard-view.jpg)
+![Three LEDs Breadboard View image](https://res.cloudinary.com/boucekdev/image/upload/v1695062876/github/o1gpbc6bjdh9em4jzmoh.jpg)
 
 ### Source Code:
 
-```cpp
-#define LED_GREEN  2
-#define LED_BLUE  13
-#define LED_RED  15
+```python
+from time import sleep_ms
+from machine import Pin
 
-void setup() {
-  pinMode(LED_GREEN, OUTPUT);
-  pinMode(LED_BLUE, OUTPUT);
-  pinMode(LED_RED, OUTPUT);
-}
+ledGreen=Pin(2,Pin.OUT)
+ledBlue=Pin(15,Pin.OUT)
+ledRed=Pin(18,Pin.OUT)
+arr = [ledBlue, ledGreen, ledRed]
 
-void loop() {
-    int leds[] = {LED_GREEN, LED_BLUE, LED_RED};
+try:
+    while True:
+        for element in arr:
+            element.value(1)
+            sleep_ms(200)
+            element.value(0)
 
-    for (int i = 0; i < 3; i++) {
-      digitalWrite(leds[i], HIGH);
-      delay(1000);
-      digitalWrite(leds[i], LOW);
-      delay(1000);
-    }
-}
+except KeyboardInterrupt:
+    pass
 ```
 
-![Three LEDs gif](./Project-1/project-1.gif)
+![Three LEDs gif](https://res.cloudinary.com/boucekdev/image/upload/v1695095256/github/xqr54kfhulvuevkerb2x.gif)
 
 ## Project 2 - Two push buttons and an LED
 
-![Two push buttons image](./Project-2/project-2.jpg)
-
 ### Date: 09/16/23
 
-Description: Design and construct a circuit that includes two push buttons and an LED. When one button is pushed, the LED is on while the other button is pushed, the LED is off. When the same button is pushed multiple times, it should not change the status of the LED. Capture your settings and working circuit in photos and videos.
+![Two push buttons image](https://res.cloudinary.com/boucekdev/image/upload/v1695062863/github/kofupmaymaicfucg2k8c.jpg)
+
+### Instructions:
+
+Design and construct a circuit that includes two push buttons and an LED. When one button is pushed, the LED is on while the other button is pushed, the LED is off. When the same button is pushed multiple times, it should not change the status of the LED. Capture your settings and working circuit in photos and videos.
 
 ### Parts:
 
@@ -72,49 +75,41 @@ Description: Design and construct a circuit that includes two push buttons and a
 
 ### Two push buttons schema:
 
-![Two push buttons Schematic image](./Project-2/project-2-schematic.jpg)
+![Two push buttons Schematic image](https://res.cloudinary.com/boucekdev/image/upload/v1695062863/github/gel1uit48joskh04gzpm.jpg)
 
 ### Two push buttons Breadboard View:
 
-![Two push buttons Bread View image](./Project-2/project-2-breadboard-view.jpg)
+![Two push buttons Bread View image](https://res.cloudinary.com/boucekdev/image/upload/v1695062863/github/ljbtiy8zgqvz2xzdkfxr.jpg)
 
 ### Source Code:
 
-```cpp
-#define PIN_LED 2
-#define PIN_BUTTON_ON 13
-#define PIN_BUTTON_OFF 12
-void setup()
-{
-    pinMode(PIN_LED, OUTPUT);
-    pinMode(PIN_BUTTON_ON, INPUT);
-    pinMode(PIN_BUTTON_OFF, INPUT);
-}
+```python
+import time
+from machine import Pin
 
-void loop()
-{
-    if (digitalRead(PIN_BUTTON_ON) == LOW)
-    {
-        delay(20);
-        buttonOn(PIN_LED);
-    }
-    if (digitalRead(PIN_BUTTON_OFF) == LOW)
-    {
-        delay(20);
-        buttonOff(PIN_LED);
-    }
-}
+led = Pin(2, Pin.OUT)
+buttonOn = Pin(13, Pin.IN, Pin.PULL_UP)
+buttonOff = Pin(12, Pin.IN, Pin.PULL_UP)
 
-void buttonOff(int pin)
-{
-    digitalWrite(pin, LOW);
-}
-void buttonOn(int pin)
-{
-    digitalWrite(pin, HIGH);
-}
+
+def reverseGPIOON():
+    led.value(1)
+
+def reverseGPIOOFF():
+    led.value(0)
+
+while True:
+    if not buttonOn.value():
+        time.sleep_ms(20)
+        reverseGPIOON()
+    if not buttonOff.value():
+        reverseGPIOOFF()
+        time.sleep_ms(20)
+
 ```
 
 ### Result:
 
-![Two push buttons gif](./Project-2/project-2.gif)
+![Two push buttons gif](https://res.cloudinary.com/boucekdev/image/upload/v1695095267/github/hni9hdlgglxnft9cpq51.gif)
+
+Blog Link: https://www.boucek.dev/blog/physical-computing-LEDs-and-push-buttons
