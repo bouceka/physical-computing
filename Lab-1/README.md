@@ -1,6 +1,6 @@
 # Physical Computing - LEDs and Push Buttons
 
-In this laboratory, we will do simple circuits where we get more familiar with ESP32 and using C++. Instructions are given by [Andrew J. Park, Ph.D.](https://www.twu.ca/profile/andrew-park).
+In this laboratory, we will do simple circuits where we get more familiar with ESP32 and Python. Instructions are given by [Andrew J. Park, Ph.D.](https://www.twu.ca/profile/andrew-park).
 
 We will use Freenove Ultimate Starter Kit for ESP32-WROVER which you can buy on [Amazon](https://www.amazon.ca/ESP32-WROVER-Contained-Compatible-Bluetooth-Tutorials/dp/B08FM2NCST). How to set up the kit and start uploading code you can find on [Freenove](https://www.freenove.com/tutorial).
 
@@ -17,10 +17,13 @@ runs, each LED turns on and off (blinks) sequentially and continually (red → g
 
 ### Parts:
 
+- ESP32-WROVER x1
+- GPIO Extension Board x1 (optional)
+- Breadboard x1
 - Jumper M/M x6
-- 1 Green LED
-- 1 Red LED
-- 1 Blue LED
+- Green LED 1x
+- Red LED 1x
+- Blue LED 1x
 - Resistor 220Ω x3
 
 ### Three LEDs schema:
@@ -67,9 +70,12 @@ Design and construct a circuit that includes two push buttons and an LED. When o
 
 ### Parts:
 
+- ESP32-WROVER x1
+- GPIO Extension Board x1 (optional)
+- Breadboard x1
 - Jumper M/M x6
-- 1 Green LED
-- 1 Two push buttons
+- Green LED 1x
+- Push buttons 2x
 - Resistor 220Ω x1
 - Resistor 10kΩ x4
 
